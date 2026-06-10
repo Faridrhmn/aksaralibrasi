@@ -1,0 +1,73 @@
+# ==========================================
+# Python
+# ==========================================
+
+# Virtual environment
+venv/
+.venv/
+env/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+
+# Distribution / packaging
+*.egg-info/
+dist/
+build/
+
+# ==========================================
+# Environment & Secrets
+# ==========================================
+.env
+.env.local
+
+# ==========================================
+# OS Generated Files
+# ==========================================
+.DS_Store
+Thumbs.db
+
+# ==========================================
+# IDE / Editor
+# ==========================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ==========================================
+# Logs
+# ==========================================
+logs/
+*.log
+
+# ==========================================
+# Project Specific
+# ==========================================
+
+# Dataset & output folders
+dataset/
+output/
+history/
+
+# NumPy dataset files
+train_*.npy
+test_*.npy
+
+# Joblib model files — tracked for deployment
+# Uncomment lines below to ignore them:
+# *.joblib
+# joblibs/*.joblib
+
+# Dependencies (Composer, Node.js)
+vendor/
+node_modules/
+
+# Compiled files
+*.class
+*.exe
+*.dll

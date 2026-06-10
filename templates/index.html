@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aksaralibrasi - Prediction</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Remix Icon -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <i class="ri-braces-line"></i> Aksaralibrasi
+        </div>
+        <div class="navbar-menu">
+            <a href="/" id="prediction-link" class="active">Prediction</a>
+            <!-- <a href="/dataset" id="dataset-link">Dataset</a> -->
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="page-title">Prediction Aksara Jawa</h1>
+
+        <form action="/" method="POST" enctype="multipart/form-data">
+            <input type="file" id="file" name="file" accept="image/*" required style="display: none;"
+                onchange="document.getElementById('file-name').textContent = this.files[0].name">
+
+            <div class="upload-section card">
+                <div class="filename-display">
+                    <i class="ri-image-add-fill" style="color: #6366f1; font-size: 24px;"></i>
+                    <span id="file-name">Select an image to process...</span>
+                </div>
+
+                <div class="action-button">
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('file').click()">
+                        <i class="ri-folder-open-line"></i> Browse
+                    </button>
+                    <button type="submit" class="btn btn-primary"
+                        onclick="document.getElementById('loader').style.display = 'block'">
+                        <i class="ri-magic-line"></i> Process
+                        <div class="loader" id="loader" style="display: none;"></div>
+                    </button>
+                    <a href="/" class="btn btn-danger"><i class="ri-refresh-line"></i> Reset</a>
+                </div>
+            </div>
+        </form>
+
+        <!-- Sample Images Section -->
+        <div class="card sample-section">
+            <h2><i class="ri-gallery-line"></i> Sample Images</h2>
+            <p class="sample-subtitle">Klik salah satu gambar di bawah untuk langsung test prediksi</p>
+            <div class="sample-grid" id="sample-grid">
+                {% set samples = ['2ya.png', '74.png', 'badha85.png', 'nyawa9.png', 'palawa.jpg', 'yaga.png'] %}
+                {% for sample in samples %}
+                <form action="/use-sample" method="POST" class="sample-form">
+                    <input type="hidden" name="sample_name" value="{{ sample }}">
+                    <button type="submit" class="sample-card {% if active_sample == sample %}sample-active{% endif %}"
+                        onclick="this.querySelector('.sample-loader').style.display='flex'">
+                        <div class="sample-img-wrapper">
+                            <img src="/sample/{{ sample }}" alt="{{ sample }}" loading="lazy">
+                            <div class="sample-overlay">
+                                <i class="ri-play-circle-line"></i>
+                            </div>
+                            <div class="sample-loader" style="display:none;">
+                                <div class="loader"></div>
+                            </div>
+                        </div>
+                        <span class="sample-name">{{ sample }}</span>
+                        {% if active_sample == sample %}
+                        <span class="sample-badge"><i class="ri-check-line"></i> Active</span>
+                        {% endif %}
+                    </button>
+                </form>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="results-grid">
+            <div class="left-col">
+                <div class="card">
+                    <h2><i class="ri-image-line"></i> Original Image</h2>
+                    {% if uploaded_filename %}
+                    <img src="/history/{{ uploaded_filename }}" alt="Uploaded Image" class="image-preview" id="preview">
+                    {% else %}
+                    <img src="{{ url_for('static', filename='preview.png') }}" id="preview" alt="Preview Image"
+                        class="image-preview">
+                    {% endif %}
+                </div>
+
+                <div class="card">
+                    <h2><i class="ri-check-double-line"></i> Result</h2>
+                    {% if result %}
+                    <img src="{{ result }}" alt="Hasil" class="image-preview">
+                    {% else %}
+                    <div class="empty-state">
+                        <i class="ri-file-search-line"></i>
+                        <span>No result available yet</span>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="right-col">
+                <div class="card" style="height: 100%;">
+                    <h2><i class="ri-list-settings-line"></i> Processing Steps</h2>
+                    <div class="process-list">
+                        {% if bounding_boxes %}
+                        {% for bounding in bounding_boxes %}
+                        <div
+                            style="background: white; border-radius: 16px; padding: 12px; border: 1px solid #f3f4f6; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+                            <img src="{{ bounding }}" alt="Proses" class="image-preview"
+                                style="border: none; box-shadow: none;">
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <div class="empty-state" style="margin-top: 40px;">
+                            <i class="ri-loader-3-line"></i>
+                            <span>No processing steps to show</span>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>
