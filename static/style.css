@@ -430,16 +430,179 @@ body {
     border-radius: 20px;
 }
 
+/* =============================================
+   RESPONSIVE - TABLET (max-width: 768px)
+   ============================================= */
 @media (max-width: 768px) {
+    /* Navbar */
+    .navbar {
+        padding: 12px 20px;
+    }
+
+    .logo {
+        font-size: 17px;
+    }
+
+    /* Container */
+    .container {
+        padding: 32px 16px;
+    }
+
+    /* Page Title */
+    .page-title {
+        font-size: 32px;
+        letter-spacing: -0.5px;
+        margin-bottom: 32px;
+    }
+
+    /* Card */
+    .card {
+        padding: 20px;
+        border-radius: 18px;
+        margin-bottom: 20px;
+    }
+
+    /* Upload Section */
+    .upload-section {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+    }
+
+    .filename-display {
+        width: 100%;
+    }
+
+    .action-button {
+        flex-wrap: wrap;
+        justify-content: stretch;
+        gap: 10px;
+    }
+
+    .action-button .btn {
+        flex: 1;
+        min-width: 0;
+        justify-content: center;
+    }
+
+    /* Results Grid */
+    .results-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    /* Sample Grid */
     .sample-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 12px;
     }
+
+    /* Process List */
+    .process-list {
+        max-height: 400px;
+    }
 }
 
+/* =============================================
+   RESPONSIVE - MOBILE (max-width: 480px)
+   ============================================= */
 @media (max-width: 480px) {
+    /* Navbar */
+    .navbar {
+        padding: 10px 16px;
+    }
+
+    .logo {
+        font-size: 15px;
+        gap: 6px;
+    }
+
+    .logo i {
+        font-size: 20px;
+    }
+
+    .navbar a {
+        font-size: 13px;
+        padding: 6px 12px;
+    }
+
+    /* Container */
+    .container {
+        padding: 24px 12px;
+    }
+
+    /* Page Title */
+    .page-title {
+        font-size: 26px;
+        margin-bottom: 24px;
+        letter-spacing: -0.5px;
+    }
+
+    /* Card */
+    .card {
+        padding: 16px;
+        border-radius: 16px;
+        margin-bottom: 16px;
+    }
+
+    .card h2 {
+        font-size: 15px;
+        margin-bottom: 16px;
+        gap: 8px;
+    }
+
+    .card h2 i {
+        padding: 6px;
+        font-size: 17px;
+    }
+
+    /* Upload Section */
+    .upload-section {
+        gap: 12px;
+    }
+
+    .filename-display {
+        font-size: 13px;
+        padding: 10px 14px;
+    }
+
+    .action-button {
+        gap: 8px;
+    }
+
+    .btn {
+        padding: 10px 16px;
+        font-size: 14px;
+        border-radius: 12px;
+    }
+
+    /* Sample Grid */
     .sample-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
+    }
+
+    .sample-card {
+        padding: 10px;
+        border-radius: 12px;
+    }
+
+    .sample-name {
+        font-size: 11px;
+    }
+
+    /* Empty State */
+    .empty-state {
+        padding: 32px 16px;
+    }
+
+    .empty-state i {
+        font-size: 28px;
+    }
+
+    /* Process List */
+    .process-list {
+        max-height: 320px;
+        padding-right: 6px;
     }
 }
